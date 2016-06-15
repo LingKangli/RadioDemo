@@ -13,11 +13,16 @@ enum TCRadiosDir {
     case TCRadiosDirV
 }
 
+protocol TCRadioItemDelegate {
+    func clickRadio(str:String)
+}
+
+
 class TCRadio: UIControl {
 
     var radios:Array<TCRadioItem> = []
-    
-    
+    var delegate : TCRadioItemDelegate?
+
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -63,7 +68,6 @@ class TCRadio: UIControl {
     
     func clickItem(sender:TCRadioItem) {
         print("tag is 、\(sender.tag)")
-        
         for i  in 0...radios.count-1 {
             if sender.stateTCRadio == .TCRadioSelected {
                 radios[i].setState(.TCRadioSelected)
@@ -71,6 +75,6 @@ class TCRadio: UIControl {
                radios[i].setState(.TCRadioNoSelected)
             }
         }
-        
+        self.delegate?.clickRadio(sender.titleStr)
     }
 }

@@ -13,15 +13,12 @@ enum TCRadioItemSelect {
     case TCRadioNoSelected
 }
 
-protocol TCRadioItemDelegate {
-    func clickRadio()
-}
-
 class TCRadioItem: UIControl {
 
     var imageStr = ""
     var imageStrSelect = ""
     var image : UIImageView?
+    var titleStr = ""
     var stateTCRadio : TCRadioItemSelect?
     var delegate : TCRadioItemDelegate?
     
@@ -38,6 +35,7 @@ class TCRadioItem: UIControl {
         
         self.imageStr = imageStr
         self.imageStrSelect = imageStrSelect
+        self.titleStr = str
         
         image = UIImageView(image: UIImage(named: imageStr))
         image!.frame = CGRect(x: 0, y: 0, width: self.frame.size.width*0.2, height: self.frame.size.width*0.2)
@@ -66,7 +64,6 @@ class TCRadioItem: UIControl {
     func click()  {
         stateTCRadio = .TCRadioSelected
         image?.image = UIImage(named: self.imageStrSelect)
-        self.delegate?.clickRadio()
     }
     
     func getLabWidth(labelStr:String,font:UIFont,height:CGFloat) -> CGFloat {

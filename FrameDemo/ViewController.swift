@@ -9,26 +9,16 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-//        let btn = TCRadio.init(values:Array<String>,direction:TCRadiosDir,selectItem:Int)
-        
-//        var radios = TCRadio.init(values: ["","",""], direction:.TCRadiosDirH , selectItem: 0)
-        
         let radio = TCRadio(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
         radio.setRadios(["男","女"], direction:.TCRadiosDirH , selectItem: 0)
+        radio.delegate = self
         self.view.addSubview(radio)
-        
-        /*
-        let radioItem = TCRadioItem(frame: CGRect(x: 0, y: 100, width: 50, height: 50))
-        
-        radioItem.backgroundColor = UIColor.greenColor()
-        self.view.addSubview(radioItem)
-        */
         
     }
     
@@ -38,5 +28,12 @@ class ViewController: UIViewController {
     }
 
 
+}
+
+extension ViewController:TCRadioItemDelegate{
+
+    func clickRadio(str:String) {
+        print("radio...\(str)")
+    }
 }
 
